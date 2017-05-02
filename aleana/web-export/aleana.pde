@@ -23,7 +23,6 @@ void draw() {
 
 void mouseClicked() {
   if ((mouseX < width/2) && (mouseY < height/2)) {
-    text("tl", 20, 15);
     tl.startAnimation();
   } else if ((mouseX >= width/2) && (mouseY < height/2)) {
     tr.startAnimation();
@@ -39,7 +38,7 @@ class Pattern {
   boolean black;
   float angle;
   float x, y, w, h, r;
-  float speed = 1;
+  float speed = 10;
   float wave = -125; //x-pos of the distortion 
   boolean animationRunning = false;
   boolean forwards = false;
@@ -53,6 +52,7 @@ class Pattern {
   }
 
   void update() {
+    println("hellooo");
     if (animationRunning) {
       wave += forwards?1:-1;
       wave *= speed;
@@ -81,11 +81,11 @@ class Pattern {
 
     // RECTANGLE 1
     pg.fill(black?255:0);
-    pg.rect(-125, -100, Size+25, Size, 25);
+    pg.rect(-125, -100, Size+25, Size, 25, 25);
 
     // RECTANGLE 2
     pg.fill(black?0:255);
-    pg.rect(-125, -100, Size, Size-25, 25);
+    pg.rect(-125, -100, Size, Size-25, 25, 25);
 
     // 4 RECTANGLES TO THE RIGHT
     for (int i=0; i<4; i++) {
@@ -97,7 +97,7 @@ class Pattern {
       h = (i==0)?Size/2:Size-(2*i)*25;
       r =  (w>25)?25:15;
       if (w>0) {
-        pg.rect(x, y, w, h, r);
+        pg.rect(x, y, w, h, r, r);
       }
     }
 
@@ -105,7 +105,7 @@ class Pattern {
     for (int i=0; i<6; i++) {
       black=!black;
       pg.fill(black?0:255);
-      pg.rect(-125, -125, Size/2+25+wave, 175-i*25, 25);
+      pg.rect(-125, -125, Size/2+25+wave, 175-i*25, 25, 25);
     }
 
     pg.popMatrix();
@@ -114,4 +114,5 @@ class Pattern {
     image(pg, xp, yp);
   }
 }
+
 
